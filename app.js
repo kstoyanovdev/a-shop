@@ -5,37 +5,38 @@ const cartItemsElement = document.querySelector('.cart-items');
 const totalElement = document.querySelector('.cart-footer');
 
 // RENDER PRODUCTS
-function renderProducts(){
-    data.forEach((product) => {
-        productsElement.innerHTML += `
-            <div id="product-cart">
-                <div class="product-cart-thumb">
-                        <a href="${product.url}">
-                            <img src="${product.thumb}" alt="${product.name}">
-                        </a>
-                    <div class="product-badges">
-                        <span class="badge">${product.badge}</span>
-                    </div>
-                </div>
-                <div class="product-cart-content"> 
-                    <div class="product-category">${product.category}</div>                
-                    <h2 class="product-title">
-                        <a href="${product.url}">${product.name}</a>
-                    </h2>
-                    <div class="product-card-footer">
-                        <div class="product-price">
-                            <span>${product.currency} ${product.price}</span>
-                            <span class="old-price">${product.currency} ${product.price_old}</span>
-                        </div>
-                        <div class="add-cart" onclick="addToCart(${product.id})">
-                            <a class="add" href="#">Add</a>
-                        </div>
-                    </div>
-                </div>
+function renderProducts() {
+    const htmlStrings = data.map((product) => {
+      return `
+        <div id="product-cart">
+          <div class="product-cart-thumb">
+            <a href="${product.url}">
+              <img src="${product.thumb}" alt="${product.name}">
+            </a>
+            <div class="product-badges">
+              <span class="badge">${product.badge}</span>
             </div>
-        `;
+          </div>
+          <div class="product-cart-content"> 
+            <div class="product-category">${product.category}</div>                
+            <h2 class="product-title">
+              <a href="${product.url}">${product.name}</a>
+            </h2>
+            <div class="product-card-footer">
+              <div class="product-price">
+                <span>${product.currency} ${product.price}</span>
+                <span class="old-price">${product.currency} ${product.price_old}</span>
+              </div>
+              <div class="add-cart" onclick="addToCart(${product.id})">
+                <a class="add" href="#">Add</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
     });
-}
+    productsElement.innerHTML = htmlStrings.join('');
+  }
 
 renderProducts();
 
